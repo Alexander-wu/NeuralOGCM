@@ -4,6 +4,10 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.10%2B-ee4c2c)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+<p align="center" width="100%">
+  <img src='Figures/NeuralOGCM_main.png' width="100%">
+</p>
+
 This repository contains the official implementation of the paper **"NeuralOGCM: Differentiable Ocean Modeling with Learnable Physics"**.
 
 **NeuralOGCM** is a novel hybrid ocean general circulation model (OGCM) that bridges the gap between traditional numerical models and pure AI approaches. By integrating a **Differentiable Physics Core** with a **Deep Learning Corrector**, it achieves high-fidelity simulation with the speed of AI models while maintaining long-term physical consistency.
