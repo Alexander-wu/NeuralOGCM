@@ -47,3 +47,88 @@ This repository contains the official implementation of the paper **"NeuralOGCM:
    pip install torch numpy h5py tqdm
    ```
 
+## 💾 Data Preparation
+
+The model is trained on a combination of **GLORYS12** (Ocean variables) and **ERA5** (Atmospheric forcing).
+
+- **Spatial Resolution:** $1.5^\circ$ ($120 \times 240$ grid).
+- **Temporal Resolution:** Daily mean (24h).
+- **Variables:** 97 channels total (93 ocean levels/variables + 4 atmospheric forcing).
+
+Expected Directory Structure:
+
+Update the root_path in Dataloader.py or pass it via command line arguments.
+
+
+```
+/path/to/dataset/
+├── train/              # Training .h5 files (1993-2017)
+├── valid/              # Validation .h5 files (2018-2019)
+├── test/               # Testing .h5 files (2020)
+├── climate_mean_s_t_ssh.npy  # Climatology statistics
+├── mean_s_t_ssh.npy          # Global mean
+└── std_s_t_ssh.npy           # Global std
+```
+## 🚀 Usage
+
+The `train.py` script serves as the unified entry point for training NeuralOGCM and baselines. It utilizes `torch.distributed.launch`.
+
+### 1. Train NeuralOGCM
+
+In the codebase, the proposed NeuralOGCM model.
+
+Bash
+```
+# Run on a single node with 8 GPUs
+python -m torch.distributed.launch --nproc_per_node=8 train.py \
+    --model NeuralOGCM \
+    --data_root /path/to/your/data \
+    --batch_size 2 \
+    --epochs 50 \
+    --lr 5e-4
+```
+
+### 2. Train Baselines
+
+You can train comparison models by changing the `--model` argument:
+
+- **FourCastNet:**
+
+  Bash
+  ```
+  python -m torch.distributed.launch --nproc_per_node=8 train.py \
+      --model fourcastnet \
+      --fourcastnet_embed_dim 256
+  ```
+
+- **SimVP:**
+
+  Bash
+  ```
+  python -m torch.distributed.launch --nproc_per_node=8 train.py \
+      --model simvp \
+      --simvp_hid_s 64
+  ```
+
+### Key Arguments
+
+- `--model`: Select architecture (`NeuralOGCM`, `unet`, `convlstm`, `simvp`, `fourcastnet`).
+- `--resume`: Path to a checkpoint (`.pth`) to resume training.
+- `--batch_size`: Batch size per GPU (default: 2, effective batch size 16 on 8 GPUs).
+
+## 📜 Citation
+
+If you find this code useful for your research, please cite our paper:
+
+```
+@article{wu2025neuralogcm,
+  title={NeuralOGCM: Differentiable Ocean Modeling with Learnable Physics},
+  author={Wu, Hao and Gao, Yuan and Xu, Fan and Liu, Guangliang and Liang, Yuxuan and Huang, Xiaomeng},
+  journal={Preprint},
+  year={2025}
+}
+```
+
+## 📄 License
+
+This project is licensed under the MIT License.
