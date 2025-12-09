@@ -8,9 +8,16 @@
   <img src='Figures/NeuralOGCM_main.png' width="100%">
 </p>
 
+
+
 This repository contains the official implementation of the paper **"NeuralOGCM: Differentiable Ocean Modeling with Learnable Physics"**.
 
 **NeuralOGCM** is a novel hybrid ocean general circulation model (OGCM) that bridges the gap between traditional numerical models and pure AI approaches. By integrating a **Differentiable Physics Core** with a **Deep Learning Corrector**, it achieves high-fidelity simulation with the speed of AI models while maintaining long-term physical consistency.
+
+
+## News 🚀🚀🚀
+- `2025/12/09`: We will release NeuralOGCM, to the best of our knowledge, is the first hybrid ocean general circulation model to integrate differentiable physics programming with deep learning.
+
 
 ## 🌟 Key Features
 
