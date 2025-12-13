@@ -17,6 +17,9 @@ This repository contains the official implementation of the paper **"NeuralOGCM:
 
 
 ## News 🚀🚀🚀
+- `2025/12/13`: We open the Model weights.
+
+
 - `2025/12/09`: We will release NeuralOGCM, to the best of our knowledge, is the first hybrid ocean general circulation model to integrate differentiable physics programming with deep learning.
 
 
